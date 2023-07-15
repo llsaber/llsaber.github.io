@@ -4,8 +4,33 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="test, Ljl&#39;s Blog">
-    <meta name="description" content="">
+    <meta name="keywords" content="学习 Http, Ljl&#39;s Blog">
+    <meta name="description" content="
+学习 Http
+
+
+学习HTTP1 HTTP状态码
+
+
+分类
+分类描述
+
+
+
+1**
+信息，服务器收到请求，需要请求者继续执行操作
+
+
+2**
+成功，操作被成功接收并处理
+
+
+3**
+重定向，需要进一步的操作以完成请求
+
+
+4**
+客户端">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +42,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>test | Ljl&#39;s Blog</title>
+    <title>学习 Http | Ljl&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -334,12 +359,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">test</h1>
+                    <h1 class="description center-align post-title">学习 Http</h1>
                 </div>
             </div>
         </div>
@@ -361,12 +386,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BD%91%E7%BB%9C/">
+                                <span class="chip bg-color">网络</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                学习
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -375,7 +413,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-07-14
+                    2022-05-08
                 </div>
                 
 
@@ -396,7 +434,667 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <hr>
+<div align='center' ><strong><font size='5'>学习 Http</font></strong></div>
+
+<hr>
+<h1 id="学习HTTP"><a href="#学习HTTP" class="headerlink" title="学习HTTP"></a>学习HTTP</h1><h1 id="1-HTTP状态码"><a href="#1-HTTP状态码" class="headerlink" title="1 HTTP状态码"></a>1 HTTP状态码</h1><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>分类描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1**</td>
+<td>信息，服务器收到请求，需要请求者继续执行操作</td>
+</tr>
+<tr>
+<td>2**</td>
+<td>成功，操作被成功接收并处理</td>
+</tr>
+<tr>
+<td>3**</td>
+<td>重定向，需要进一步的操作以完成请求</td>
+</tr>
+<tr>
+<td>4**</td>
+<td>客户端错误，请求包含语法错误或无法完成请求</td>
+</tr>
+<tr>
+<td>5**</td>
+<td>服务器错误，服务器在处理请求的过程中发生了错误</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码英文名称</th>
+<th>中文描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>100</td>
+<td>Continue</td>
+<td>继续。客户端应继续其请求</td>
+</tr>
+<tr>
+<td>101</td>
+<td>Switching Protocols</td>
+<td>切换协议。服务器根据客户端的请求切换协议。只能切换到更高级的协议，例如，切换到HTTP的新版本协议</td>
+</tr>
+<tr>
+<td>200</td>
+<td>OK</td>
+<td>请求成功。一般用于GET与POST请求</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created</td>
+<td>已创建。成功请求并创建了新的资源</td>
+</tr>
+<tr>
+<td>202</td>
+<td>Accepted</td>
+<td>已接受。已经接受请求，但未处理完成</td>
+</tr>
+<tr>
+<td>203</td>
+<td>Non-Authoritative Information</td>
+<td>非授权信息。请求成功。但返回的meta信息不在原始的服务器，而是一个副本</td>
+</tr>
+<tr>
+<td>204</td>
+<td>No Content</td>
+<td>无内容。服务器成功处理，但未返回内容。在未更新网页的情况下，可确保浏览器继续显示当前文档</td>
+</tr>
+<tr>
+<td>205</td>
+<td>Reset Content</td>
+<td>重置内容。服务器处理成功，用户终端（例如：浏览器）应重置文档视图。可通过此返回码清除浏览器的表单域</td>
+</tr>
+<tr>
+<td>206</td>
+<td>Partial Content</td>
+<td>部分内容。服务器成功处理了部分GET请求</td>
+</tr>
+<tr>
+<td>300</td>
+<td>Multiple Choices</td>
+<td>多种选择。请求的资源可包括多个位置，相应可返回一个资源特征与地址的列表用于用户终端（例如：浏览器）选择</td>
+</tr>
+<tr>
+<td><strong>301</strong></td>
+<td>Moved Permanently</td>
+<td>永久移动。请求的资源已被永久的移动到新URI，返回信息会包括新的URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替</td>
+</tr>
+<tr>
+<td><strong>302</strong></td>
+<td>Found</td>
+<td>临时移动。与301类似。但资源只是临时被移动。客户端应继续使用原有URI</td>
+</tr>
+<tr>
+<td>303</td>
+<td>See Other</td>
+<td>查看其它地址。与301类似。使用GET和POST请求查看</td>
+</tr>
+<tr>
+<td>304</td>
+<td>Not Modified</td>
+<td>未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源</td>
+</tr>
+<tr>
+<td>305</td>
+<td>Use Proxy</td>
+<td>使用代理。所请求的资源必须通过代理访问</td>
+</tr>
+<tr>
+<td>306</td>
+<td>Unused</td>
+<td>已经被废弃的HTTP状态码</td>
+</tr>
+<tr>
+<td>307</td>
+<td>Temporary Redirect</td>
+<td>临时重定向。与302类似。使用GET请求重定向</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>客户端请求的语法错误，服务器无法理解</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+<td>请求要求用户的身份认证</td>
+</tr>
+<tr>
+<td>402</td>
+<td>Payment Required</td>
+<td>保留，将来使用</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>服务器理解请求客户端的请求，但是拒绝执行此请求</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+<td>服务器无法根据客户端的请求找到资源（网页）。通过此代码，网站设计人员可设置”您所请求的资源无法找到”的个性页面</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed</td>
+<td>客户端请求中的方法被禁止</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable</td>
+<td>服务器无法根据客户端请求的内容特性完成请求</td>
+</tr>
+<tr>
+<td>407</td>
+<td>Proxy Authentication Required</td>
+<td>请求要求代理的身份认证，与401类似，但请求者应当使用代理进行授权</td>
+</tr>
+<tr>
+<td>408</td>
+<td>Request Time-out</td>
+<td>服务器等待客户端发送的请求时间过长，超时</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict</td>
+<td>服务器完成客户端的PUT请求是可能返回此代码，服务器处理请求时发生了冲突</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone</td>
+<td>客户端请求的资源已经不存在。410不同于404，如果资源以前有现在被永久删除了可使用410代码，网站设计人员可通过301代码指定资源的新位置</td>
+</tr>
+<tr>
+<td>411</td>
+<td>Length Required</td>
+<td>服务器无法处理客户端发送的不带Content-Length的请求信息</td>
+</tr>
+<tr>
+<td>412</td>
+<td>Precondition Failed</td>
+<td>客户端请求信息的先决条件错误</td>
+</tr>
+<tr>
+<td>413</td>
+<td>Request Entity Too Large</td>
+<td>由于请求的实体过大，服务器无法处理，因此拒绝请求。为防止客户端的连续请求，服务器可能会关闭连接。如果只是服务器暂时无法处理，则会包含一个Retry-After的响应信息</td>
+</tr>
+<tr>
+<td>414</td>
+<td>Request-URI Too Large</td>
+<td>请求的URI过长（URI通常为网址），服务器无法处理</td>
+</tr>
+<tr>
+<td>415</td>
+<td>Unsupported Media Type</td>
+<td>服务器无法处理请求附带的媒体格式</td>
+</tr>
+<tr>
+<td>416</td>
+<td>Requested range not satisfiable</td>
+<td>客户端请求的范围无效</td>
+</tr>
+<tr>
+<td>417</td>
+<td>Expectation Failed</td>
+<td>服务器无法满足Expect的请求头信息</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>服务器内部错误，无法完成请求</td>
+</tr>
+<tr>
+<td>501</td>
+<td>Not Implemented</td>
+<td>服务器不支持请求的功能，无法完成请求</td>
+</tr>
+<tr>
+<td>502</td>
+<td>Bad Gateway</td>
+<td>作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable</td>
+<td>由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中</td>
+</tr>
+<tr>
+<td>504</td>
+<td>Gateway Time-out</td>
+<td>充当网关或代理的服务器，未及时从远端服务器获取请求</td>
+</tr>
+<tr>
+<td>505</td>
+<td>HTTP Version not supported</td>
+<td>服务器不支持请求的HTTP协议的版本，无法完成处理</td>
+</tr>
+</tbody></table>
+<p><strong>301与302</strong></p>
+<ul>
+<li>301：永久跳转，客户端发送请求访问‘&#x2F;test’的资源，游览器接收到后，因为‘&#x2F;test’资源路径改变，返回301并设置响应首部字段’Location’:’&#x2F;newtest’，告诉客户端在下次访问‘&#x2F;test’的时候，<strong>在客户端直接更改为’&#x2F;newtest’</strong></li>
+<li>302：临时跳转,客户端发送请求访问‘&#x2F;test’的资源，游览器接收到后，因为‘&#x2F;test’资源路径改变，返回302并设置响应首部字段’Location’:’&#x2F;newtest’，告诉客户端临时跳转到’&#x2F;newtest’；客户端在下次访问‘&#x2F;test’资源还是会重复上面的操作，并不会在客户端直接更改访问资源的路径</li>
+</ul>
+<h1 id="2-HTTP结构"><a href="#2-HTTP结构" class="headerlink" title="2 HTTP结构"></a>2 HTTP结构</h1><p><img src="https://lijinhongpassion.github.io/codeant/c29a/1.png"></p>
+<h1 id="3-HTTP首部"><a href="#3-HTTP首部" class="headerlink" title="3 HTTP首部"></a>3 HTTP首部</h1><p><strong>1. 通用首部字段</strong>–9</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Cache-Control</strong></td>
+<td>控制缓存的行为</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>逐跳首部、连接的管理</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>创建报文的日期时间</td>
+</tr>
+<tr>
+<td>Program</td>
+<td>报文指令</td>
+</tr>
+<tr>
+<td>Trailer</td>
+<td>报文末端的首部一览</td>
+</tr>
+<tr>
+<td>Transfer-Encoding</td>
+<td>指定报文主体的传输编码方式</td>
+</tr>
+<tr>
+<td>Upgrade</td>
+<td>升级为其他协议</td>
+</tr>
+<tr>
+<td>Via</td>
+<td>代理服务器的相关信息</td>
+</tr>
+<tr>
+<td>Warning</td>
+<td>错误通知</td>
+</tr>
+</tbody></table>
+<p><strong>Cache-Control：</strong></p>
+<p>粗体指令为常用指令</p>
+<ul>
+<li>可缓存性<ul>
+<li><strong>public：</strong> 表明其他用户也可以利用缓存</li>
+<li><strong>private：</strong> 缓存服务器会对该特定用户提供资源缓存服务，<strong>对于其他用户发来的请求，缓存服务器则不会返回缓存</strong></li>
+<li><strong>no-Cache</strong>（不缓存过期的资源）：<ul>
+<li>客户端：客户端发送的请求中包含no-cache指令，表示客户端不会接收缓存过的响应，则中间的缓存服务器（例如nginx服务器）必须将请求转发给源服务器</li>
+<li>服务器端：若是服务器端返回的响应中包含no-cache指令（response.setHeader(……)），那么缓存服务器（例如nginx）就不能对资源进行缓存；<strong>并且在以后都不会再对缓存服务器请求中提出的资源有效性进行确认，且禁止其对响应的资源进行缓存</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>缓存期限和认证<ul>
+<li>s-maxage：该指令和max-age相同，不同点是s-maxage只适用于供对为用户使用的公共缓存服务器（<strong>也就是说只有在代理服务器才会生效</strong>），max-age是在<strong>客户端生效</strong>；使用该指令过后，会忽略对Expires首部字段和max-age指令的处理；eg : Cache-Control:s-maxage&#x3D;604800（单位秒）</li>
+<li><strong>max-age：</strong> 缓存在未过期的时间内是访问的客户端本地的缓存，当缓存过期后才会访问服务器；eg : Cache-Control:max-age&#x3D;604800（单位秒）</li>
+<li>max-stale：只能由客户端发起请求；客户端对过期的请求接收；eg:Cache-Control:max-stale&#x3D;604800（<strong>资源过期时间在指定时间内，才会被客户端接收</strong>）； Cache-Control:max-stale（不设置参数表示不论资源过期多久，都接收）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>重新验证<ul>
+<li>must-revalidate：这是用在客户端的；在设置了max-age的缓存资源过期后，那我们必须去源服务端重新获取资源，来验证这个缓存资源是否真的过期，而不能直接使用本地缓存；</li>
+<li>proxy-revalidate：要求<strong>所有的</strong>缓存服务器<strong>接收到客户端带有该指令请求</strong>，在返回响应之前，必须在此验证缓存的有效性。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>其他<ul>
+<li>no-store（不缓存）：暗示请求（和对应的响应）或者响应中包含机密信息，该指令表示在本地存储不能缓存请求或者响应的任一部分</li>
+<li>no-transform：表示无论在请求还是响应中，缓存都不能改变实体主体的媒体类型；这样做可防止缓存或代理压缩图片等类似操作。</li>
+</ul>
+</li>
+</ul>
+<p><strong>Connection：</strong></p>
+<p>作用</p>
+<ul>
+<li>控制不再转发给代理首部字段</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>eg: Connection: Upgeade    &#x2F;&#x2F;表示首部字段中upgrade字段会被从http中删除后在转发</td>
+</tr>
+</tbody></table>
+<ul>
+<li>管理持久化连接<ul>
+<li><p>close：当服务器端想明确断开连接时，则指定Connection的值为close</p>
+</li>
+<li><p>Keep-Alive：客户端发送请求给服务器时，服务器会像下图那样加上Keep-Alive首部字段和Connection首部字段后返回响应</p>
+<p><img src="https://lijinhongpassion.github.io/codeant/c29a/2.png"></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>**2. 请求首部字段 **–19</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Accept</strong></td>
+<td>用户代理可处理的媒体类型</td>
+</tr>
+<tr>
+<td>Accept-Charset</td>
+<td>优先的字符集</td>
+</tr>
+<tr>
+<td><strong>Accept-Encoding</strong></td>
+<td>优先的内容编码</td>
+</tr>
+<tr>
+<td><strong>Accept-Language</strong></td>
+<td>优先的语言（自然语言）</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Web认证信息</td>
+</tr>
+<tr>
+<td>Expect</td>
+<td>期待服务器的特定行为</td>
+</tr>
+<tr>
+<td>From</td>
+<td>用户的电子邮箱地址</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>请求资源所在的服务器</td>
+</tr>
+<tr>
+<td>If-Match</td>
+<td>比较实体标记（ETag）</td>
+</tr>
+<tr>
+<td>If-Modified-Since</td>
+<td>比较资源的更新时间</td>
+</tr>
+<tr>
+<td>If-None-Match</td>
+<td>比较实体标记（与If-Match相反）</td>
+</tr>
+<tr>
+<td>If-Range</td>
+<td>资源未更新时发送实体Byte的范围请求</td>
+</tr>
+<tr>
+<td>If-Unmodified-Since</td>
+<td>比较资源的更新时间（与If-Modified-Since相反）</td>
+</tr>
+<tr>
+<td>Max-Forwards</td>
+<td>最大传输逐跳数</td>
+</tr>
+<tr>
+<td>Proxy-Authorization</td>
+<td>代理服务器要求客户端的认证信息</td>
+</tr>
+<tr>
+<td>Range</td>
+<td>实体的字节范围请求</td>
+</tr>
+<tr>
+<td>Referer</td>
+<td>对请求中的URI的原始获取方</td>
+</tr>
+<tr>
+<td>TE</td>
+<td>传输编码的优先级</td>
+</tr>
+<tr>
+<td><strong>User-Agent</strong></td>
+<td>HTTP客户端程序的信息</td>
+</tr>
+</tbody></table>
+<p><strong>Accept、Accept-Encoding、Accept-Language</strong>与实体类首部字段Content-Type、Content-Encoding、Content-Language相对应</p>
+<p>客户端发送请求首部字段Accept、Accept-Encoding、Accept-Language，服务器接收后在实体报文里面设置Content-Type、Content-Encoding、Content-Language与之对应响应客户端的请求</p>
+<p><strong>3.响应首部字段</strong>–9</p>
+<table>
+<thead>
+<tr>
+<th><strong>首部字段名</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Accept-Ranges</td>
+<td>是否接受字节范围请求</td>
+</tr>
+<tr>
+<td>Age</td>
+<td>推算资源创建经过时间</td>
+</tr>
+<tr>
+<td><strong>ETag</strong></td>
+<td>资源的匹配信息</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>令客户端重定向至指定URI</td>
+</tr>
+<tr>
+<td>Proxy-Authenticate</td>
+<td>代理服务器对客户端的认证信息</td>
+</tr>
+<tr>
+<td>Retry-After</td>
+<td>对再次发起请求的时机要求</td>
+</tr>
+<tr>
+<td>Server</td>
+<td>HTTP服务器的安装信息</td>
+</tr>
+<tr>
+<td>Vary</td>
+<td>代理服务器缓存的管理信息</td>
+</tr>
+<tr>
+<td>WWW-Authenticate</td>
+<td>服务器对客户端的认证信息</td>
+</tr>
+</tbody></table>
+<p><strong>ETag：</strong></p>
+<p>数据签名，它是一种可将资源以字符串形式做唯一性标识的方式。服务器端会为每份资源分配对应的ETag值。用ETag来标记唯一资源；</p>
+<p>配合if-Match或者if-Non-Match使用（比较实体标记（ETag）），这两个字段都是请求首部字段</p>
+<p>服务器获取到字段后对比ETag，判断是否返回一个新的资源</p>
+<p>**4. 实体首部字段 **–10</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Allow</td>
+<td>资源可支持的HTTP方法</td>
+</tr>
+<tr>
+<td><strong>Content-Encoding</strong></td>
+<td>实体主体试用的编码方式</td>
+</tr>
+<tr>
+<td><strong>Content-Language</strong></td>
+<td>实体主体的自然语言</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>实体主体的大小（单位：字节）</td>
+</tr>
+<tr>
+<td>Content-Location</td>
+<td>替换对应资源的URI</td>
+</tr>
+<tr>
+<td>Content-MD5</td>
+<td>实体主体的报文摘要</td>
+</tr>
+<tr>
+<td>Content-Range</td>
+<td>实体主体的位置范围</td>
+</tr>
+<tr>
+<td><strong>Content-Type</strong></td>
+<td>实体主体的媒体类型</td>
+</tr>
+<tr>
+<td>Expires</td>
+<td>实体主体过期的日期时间</td>
+</tr>
+<tr>
+<td><strong>Last-Modified</strong></td>
+<td>资源的最后修改日期时间</td>
+</tr>
+</tbody></table>
+<p><strong>Last-Modified：</strong></p>
+<p>配合If-Modified-Since或者If-Unmodified-Since使用，比较资源的更新时间，这俩个字段是请求首部字段</p>
+<p><strong>5、为Cookie服务的首部字段</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>说明</th>
+<th>首部类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Set-Cookie</td>
+<td>开始状态管理所使用的Cookie信息</td>
+<td>响应首部字段</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>服务器接收到的Cookie信息</td>
+<td>请求首部字段</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><strong>Set-Cookie字段</strong>的属性</p>
+<p>| 说明  |<br>| — | — |<br>| NAME&#x3D;VALUE | 赋予Cookie名称和值（必须项）eg:id &#x3D; ‘1312’ |<br>| expires&#x3D;Date | Cookie的有效期（若是不明确有效期或者没有设置，则Cookie的有效期为游览器关闭为止） |<br>| path&#x3D;PATH | 将服务器上的文件目录作为Cookie的适用对象（若不指定则默认为文档所在的文件目录） |<br>| domain&#x3D;域名 | 作为Cookie适用对象的域名（若不明确则默认为创建Cookie的服务器的域名） |<br>| Secure | 仅在HTTPS安全通信时才会发送Cookie |<br>| HttpOnly | 加以限制，使Cookie不能被javascript脚本访问 |</p>
+<p>|     |<br>| — | — |<br>| 1   | eg: Set-Cookie: id&#x3D;’123’; HttpOnly |</p>
+</li>
+<li><p>Cookie</p>
+<p>当服务器通过set-cookie设置cookie信息返回响应给客户端，客户端接收到以后，就将响应首部字段中的set-cookie的cookie信息根据所设置的属性保存等；</p>
+<p>在下一次发送请求的时候根据属性要求将cookie信息写入请求首部字段cookie，再发送；</p>
+<p>客户端接收到多个cookie时，同样可以以多个cookie形式返回给服务器；</p>
+</li>
+</ul>
+<p><strong>6、其他首部字段</strong></p>
+<ul>
+<li>X-Frame_Options</li>
+<li>X-Xss_Protection</li>
+<li>DNT</li>
+<li>P3P</li>
+</ul>
+<h1 id="4-HTTPS"><a href="#4-HTTPS" class="headerlink" title="4 HTTPS"></a>4 HTTPS</h1><p>##<strong>1. HTTP缺点</strong></p>
+<ul>
+<li>明文通信（不加密），内容可能会被窃取</li>
+<li>不验证通信方的身份，身份可能会被伪装；例如cookie泄露，攻击者可利用cookie模拟用户操作</li>
+<li>无法证明报文完整性，内容可能被篡改</li>
+</ul>
+<p>所以HTTP是不安全的通信协议</p>
+<hr>
+<p>##<strong>2. HTTPS &#x3D; HTTP + 加密 + 认证 + 完整性保护 &#x3D; HTTP + SSL （或者TLS）</strong></p>
+<p><strong>解释：</strong> HTTP将通信接口部分用SSL或TLS协议代替</p>
+<p>HTTP通信过程：HTTP-&gt;TCP</p>
+<p>HTTPS通信过程：HTTP-&gt;SSL-&gt;TCP</p>
+<hr>
+<h2 id="3-怎么实现HTTP-加密-认证-完整性保护？"><a href="#3-怎么实现HTTP-加密-认证-完整性保护？" class="headerlink" title="3. 怎么实现HTTP + 加密 + 认证 + 完整性保护？"></a><strong>3. 怎么实现HTTP + 加密 + 认证 + 完整性保护？</strong></h2><ol>
+<li><p>加密方式</p>
+<ul>
+<li><p>对称密钥加密（也叫共享密钥加密）：加密和解密同用一个密钥</p>
+<p>问题：如何保证密钥在传输过程中不被窃取</p>
+<p>解决：利用 非对称密钥加密 传输 对称密钥加密中需要使用到的密钥</p>
+</li>
+<li><p>非对称密钥加密（也叫公开密钥加密）：私钥、公钥；发送方先用公钥对内容加密，接收方用自己的私钥进行解密；该方法解决了<strong>对称密钥加密方式</strong>存在的问题，因为即使发送方发送过来的信息在传输途中被窃取，因为攻击者没有私钥，所以无法解密</p>
+<p>问题：无法证明公钥就是真正的公钥，有可能被攻击者替换掉</p>
+<p>解决：使用 数字证书认证机构（CA） 和 相关机关 颁发的 公开密钥证书，在下面第三点会详细阐述<br>非对称比对称处理速度更慢；</p>
+</li>
+</ul>
+</li>
+<li><p>HTTPS加密方式 &#x20;</p>
+<p>HTTPS采用混合加密制度，非对称密钥加密用于传输对称密钥加密使用的密钥，在之后就是使用对称密钥加密传输加密的报文，因为堆成密钥加密方式保证了密钥不会被窃取。</p>
+</li>
+<li><p>HTTPS使用证书</p>
+<ul>
+<li><p>证明公开密钥正确性的证书</p>
+<p><img src="https://lijinhongpassion.github.io/codeant/c29a/3.png"></p>
+</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://lijinhongpassion.github.io/codeant/c29a/4.png"></p>
+<ul>
+<li><p>证明组织真实性的EV SSL证书</p>
+</li>
+<li><p>用以确认客户端的客户端证书</p>
+<p>证明正在与服务器通信的客户端一直是预料之中的客户端。与服务器证书是一样的原理。</p>
+</li>
+<li><p>自认证机构颁发的自签名证书（无效）</p>
+</li>
+</ul>
+<hr>
+<h2 id="4-HTTPS安全通信流程"><a href="#4-HTTPS安全通信流程" class="headerlink" title="4. HTTPS安全通信流程"></a><strong>4. HTTPS安全通信流程</strong></h2><p><img src="https://lijinhongpassion.github.io/codeant/c29a/5.png"></p>
+<h2 id="5-SSL速度"><a href="#5-SSL速度" class="headerlink" title="5. SSL速度"></a><strong>5. SSL速度</strong></h2><p>因为HTTPS与HTTP相比，增加了SSL，导致速度会慢2~100倍。</p>
+<p>SSL的慢：</p>
+<ul>
+<li>通信慢（因为要协商准备加密组件等）</li>
+<li>小号CPU及内存等资源（加密解密操作）</li>
+</ul>
+<p>改善方式：SSL加速器</p>
+<h2 id="6-为什么不一直使用HTTPS"><a href="#6-为什么不一直使用HTTPS" class="headerlink" title="6. 为什么不一直使用HTTPS"></a><strong>6. 为什么不一直使用HTTPS</strong></h2><ul>
+<li>消耗更多的服务器资源，导致单位时间内处理请求的数量减少</li>
+<li>节约购买证书的开销</li>
+</ul>
+<p>使用方式：如果是非敏感信息则使用HTTP通信，反之，包含个人敏感数据时使用HTTPS；在进行HTTPS通信时，所传输的数据不一定全部是敏感数据，所以可选择部分加密，以节约资源。</p>
+<h1 id="5-确认用户身份的认证"><a href="#5-确认用户身份的认证" class="headerlink" title="5 确认用户身份的认证"></a>5 确认用户身份的认证</h1><p>HTTP1.1使用的认证方式</p>
+<ul>
+<li>BASIC认证（基本认证） <strong>不常用</strong></li>
+<li>DIGEST认证（摘要认证） <strong>不常用</strong></li>
+<li>SSL客户端认证 （需要客户端导入证书以及证书需要费用，并未普及使用）</li>
+<li>FORMBASE认证（基于表单认证）</li>
+</ul>
+<p>所以现在常用的是表单认证+cookie，使用cookie来管理session会话，并且为了防止XSS攻击，应在cookie里设置httponly属性，这样在js脚本里面就不能使用document.cookie</p>
+<p><img src="https://lijinhongpassion.github.io/codeant/c29a/6.png"></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><strong>[1]【日】上野 宣.图解HTTP[M].人民邮电出版社:北京,2014.05:1-165.</strong></p>
+<p><strong>[2]维基百科.HTTP标头字段列表[EB&#x2F;OL].</strong><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/List_of_HTTP_header_fields" title="https://en.wikipedia.org/wiki/List_of_HTTP_header_fields"><strong>https://en.wikipedia.org/wiki/List_of_HTTP_header_fields</strong></a><strong>.</strong></p>
+
                 
             </div>
             <hr/>
@@ -412,7 +1110,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">saber</a>
+                    <a href="/about" rel="external nofollow noreferrer">Jialu Li</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -422,7 +1120,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/07/14/test/">http://example.com/2023/07/14/test/</a>
+                    <a href="http://example.com/2022/05/08/%E5%AD%A6%E4%B9%A0HTTP/">http://example.com/2022/05/08/%E5%AD%A6%E4%B9%A0HTTP/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -435,7 +1133,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">saber</a>
+                    <a href="/about" target="_blank">Jialu Li</a>
                     !
                 </span>
             </div>
@@ -459,7 +1157,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E7%BD%91%E7%BB%9C/">
+                                    <span class="chip bg-color">网络</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -536,18 +1238,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/07/14/test/">
+                <a href="/2023/05/06/Markdown-%E8%AF%AD%E6%B3%95%E5%8F%82%E8%80%83/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="test">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Markdown 语法参考">
                         
-                        <span class="card-title">test</span>
+                        <span class="card-title">Markdown 语法参考</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -557,18 +1258,29 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-14
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-06
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            saber
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    学习
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Markdown/">
+                        <span class="chip bg-color">Markdown</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -579,13 +1291,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/07/13/hello-world/">
+                <a href="/2022/05/06/Eclipse%E6%96%B0%E5%BB%BAMaven%E9%A1%B9%E7%9B%AE/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Eclipse新建Maven项目">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">Eclipse新建Maven项目</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -596,15 +1308,27 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-13
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-06
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            saber
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    学习
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
                 </div>
                 
             </div>
