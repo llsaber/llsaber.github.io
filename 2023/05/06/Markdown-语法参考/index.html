@@ -432,7 +432,12 @@ Markdown 语法参考Typecho和hexo，都使用 Markdown 作为其内容书写�
 <hr>
 <h2 id="Markdown-标题"><a href="#Markdown-标题" class="headerlink" title="Markdown 标题"></a>Markdown 标题</h2><p>Markdown 通过 <code># + 空格 + 标题内容</code> 的方式，来定义一个标题。</p>
 <p>其中<code>#</code>的多少表示这是第几级标题，最多可以有6级。</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 第一级标题</span></span><br><span class="line"><span class="section">## 第二级标题</span></span><br><span class="line"><span class="section">### 第三级标题</span></span><br><span class="line"><span class="section">#### 第四级标题</span></span><br><span class="line"><span class="section">##### 第五级标题</span></span><br><span class="line"><span class="section">###### 第六级标题</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 第一级标题</span>
+<span class="token title important"><span class="token punctuation">##</span> 第二级标题</span>
+<span class="token title important"><span class="token punctuation">###</span> 第三级标题</span>
+<span class="token title important"><span class="token punctuation">####</span> 第四级标题</span>
+<span class="token title important"><span class="token punctuation">#####</span> 第五级标题</span>
+<span class="token title important"><span class="token punctuation">######</span> 第六级标题</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://pic.idzd.top/usr/uploads/2020/03/12/23684175186550.png"></p>
 <hr>
@@ -442,13 +447,20 @@ Markdown 语法参考Typecho和hexo，都使用 Markdown 作为其内容书写�
 <li>删除线：在需要 删除线 的内容左右添加<code>~~</code></li>
 <li>斜体加粗：在需要 斜体加粗 的内容左右添加<code>***</code></li>
 </ul>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="strong">**这是需要 加粗 的内容**</span></span><br><span class="line"><span class="emphasis">*这是需要 斜体 的内容*</span></span><br><span class="line">~~这是需要 删除线 的内容~~</span><br><span class="line"><span class="strong">**<span class="emphasis">*这是需要 斜体+加粗 的内容*</span>**</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token bold"><span class="token punctuation">**</span><span class="token content">这是需要 加粗 的内容</span><span class="token punctuation">**</span></span>
+<span class="token italic"><span class="token punctuation">*</span><span class="token content">这是需要 斜体 的内容</span><span class="token punctuation">*</span></span>
+<span class="token strike"><span class="token punctuation">~~</span><span class="token content">这是需要 删除线 的内容</span><span class="token punctuation">~~</span></span>
+<span class="token bold"><span class="token punctuation">**</span><span class="token content"><span class="token italic"><span class="token punctuation">*</span><span class="token content">这是需要 斜体+加粗 的内容</span><span class="token punctuation">*</span></span></span><span class="token punctuation">**</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://pic.idzd.top/usr/uploads/2020/03/12/24073889716753.png"></p>
 <hr>
 <h2 id="Markdown-引用"><a href="#Markdown-引用" class="headerlink" title="Markdown 引用"></a>Markdown 引用</h2><p>Markdown 通过 <code>&gt; + 空格 + 引用内容</code> 的方式，来定义一个引用。</p>
 <p>引用可以嵌套，只需要使用多个<code>&gt;</code>即可</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="quote">&gt; 这是一个引用</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;这是一个嵌套引用</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;当然您可以多层嵌套</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token blockquote punctuation">></span> 这是一个引用
+
+<span class="token blockquote punctuation">>></span>这是一个嵌套引用
+
+<span class="token blockquote punctuation">>>>>>>>>>></span>当然您可以多层嵌套<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://pic.idzd.top/usr/uploads/2020/03/12/243573302527412.png"></p>
 <hr>
@@ -457,24 +469,50 @@ Markdown 语法参考Typecho和hexo，都使用 Markdown 作为其内容书写�
 </blockquote>
 <h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>Markdown 通过 <code>- + 空格 + 无序列表内容</code> 的方式，来定义一个无序列表。</p>
 <p>通过缩进的方式来确定无序类表等级。</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> 无序列表内容</span><br><span class="line"><span class="bullet">-</span> 无序列表内容</span><br><span class="line"><span class="bullet">-</span> 无序列表内容</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 第一级无序列表内容</span><br><span class="line"><span class="bullet">    -</span> 第二级无序列表内容</span><br><span class="line"><span class="bullet">        -</span> 第三级无序列表内容</span><br><span class="line"><span class="bullet">            -</span> 第四级无序列表内容</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token list punctuation">-</span> 无序列表内容
+<span class="token list punctuation">-</span> 无序列表内容
+<span class="token list punctuation">-</span> 无序列表内容
+
+<span class="token list punctuation">-</span> 第一级无序列表内容
+    <span class="token list punctuation">-</span> 第二级无序列表内容
+        <span class="token list punctuation">-</span> 第三级无序列表内容
+            <span class="token list punctuation">-</span> 第四级无序列表内容<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://pic.idzd.top/usr/uploads/2020/03/12/249133774809427.png"></p>
 <hr>
 <h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>Markdown 通过 <code>数字 + . + 空格 + 有序列表内容</code> 的方式，来定义一个有序列表。</p>
 <p>通过缩进的方式来确定有序类表等级。</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 有序列表内容</span><br><span class="line"><span class="bullet">2.</span> 有序列表内容</span><br><span class="line"><span class="bullet">3.</span> 有序列表内容</span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> 第一级有序列表内容</span><br><span class="line"><span class="bullet">    1.</span> 第二级有序列表内容</span><br><span class="line"><span class="bullet">    2.</span> 第二级有序列表内容</span><br><span class="line"><span class="bullet">    3.</span> 第二级有序列表内容</span><br><span class="line"><span class="bullet">2.</span> 第一级有序列表内容</span><br><span class="line"><span class="bullet">    1.</span> 第二级有序列表内容</span><br><span class="line"><span class="bullet">    2.</span> 第二级有序列表内容</span><br><span class="line"><span class="bullet">    3.</span> 第二级有序列表内容</span><br><span class="line"><span class="bullet">3.</span> 第一级有序列表内容</span><br><span class="line"><span class="bullet">    1.</span> 第二级有序列表内容</span><br><span class="line"><span class="bullet">    2.</span> 第二级有序列表内容</span><br><span class="line"><span class="bullet">    3.</span> 第二级有序列表内容</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token list punctuation">1.</span> 有序列表内容
+<span class="token list punctuation">2.</span> 有序列表内容
+<span class="token list punctuation">3.</span> 有序列表内容
+
+<span class="token list punctuation">1.</span> 第一级有序列表内容
+    <span class="token list punctuation">1.</span> 第二级有序列表内容
+    <span class="token list punctuation">2.</span> 第二级有序列表内容
+    <span class="token list punctuation">3.</span> 第二级有序列表内容
+<span class="token list punctuation">2.</span> 第一级有序列表内容
+    <span class="token list punctuation">1.</span> 第二级有序列表内容
+    <span class="token list punctuation">2.</span> 第二级有序列表内容
+    <span class="token list punctuation">3.</span> 第二级有序列表内容
+<span class="token list punctuation">3.</span> 第一级有序列表内容
+    <span class="token list punctuation">1.</span> 第二级有序列表内容
+    <span class="token list punctuation">2.</span> 第二级有序列表内容
+    <span class="token list punctuation">3.</span> 第二级有序列表内容<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://pic.idzd.top/usr/uploads/2020/03/12/25174871263771.png"></p>
 <hr>
 <h2 id="Markdown-分割线"><a href="#Markdown-分割线" class="headerlink" title="Markdown 分割线"></a>Markdown 分割线</h2><p>Markdown 通过 3个及以上数量连续的<code>*</code>或<code>-</code>，来定义一个分割线。</p>
 <hr>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">---</span></span><br><span class="line">----</span><br><span class="line"><span class="strong">***</span></span><br><span class="line"><span class="strong">**</span><span class="strong">**<span class="emphasis">*</span></span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important">---
+<span class="token punctuation">----</span></span>
+<span class="token hr punctuation">***</span>
+<span class="token hr punctuation">*****</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://pic.idzd.top/usr/uploads/2020/03/12/245721970648303.png"></p>
 <hr>
 <h2 id="Markdown-超链接"><a href="#Markdown-超链接" class="headerlink" title="Markdown 超链接"></a>Markdown 超链接</h2><p>Markdown 通过 <code>[超链接名](超链接地址 &quot;超链接title&quot;)</code>，来插入一个超链接。其中 title 可以省略。</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">百度</span>](<span class="link">https://www.baidu.com</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token url">[<span class="token content">百度</span>](<span class="token url">https://www.baidu.com</span>)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><a target="_blank" rel="noopener" href="https://www.baidu.com/" title="百度">百度</a></p>
 <hr>
@@ -486,7 +524,17 @@ Markdown 语法参考Typecho和hexo，都使用 Markdown 作为其内容书写�
 </ol>
 </li>
 </ul>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">`这是行内代码块`</span></span><br><span class="line"></span><br><span class="line"><span class="code">    这是多行代码块（缩进风格）</span></span><br><span class="line"><span class="code">    这是多行代码块（缩进风格）</span></span><br><span class="line"><span class="code">    这是多行代码块（缩进风格）</span></span><br><span class="line"><span class="code"></span></span><br><span class="line">（<span class="code">```markdown）</span></span><br><span class="line"><span class="code">这是多行代码块（多语言风格）</span></span><br><span class="line"><span class="code">这是多行代码块（多语言风格）</span></span><br><span class="line"><span class="code">这是多行代码块（多语言风格）</span></span><br><span class="line"><span class="code">（```</span>）</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token code-snippet code keyword">`这是行内代码块`</span>
+
+<span class="token code keyword">    这是多行代码块（缩进风格）
+    这是多行代码块（缩进风格）
+    这是多行代码块（缩进风格）</span>
+
+（```markdown）
+这是多行代码块（多语言风格）
+这是多行代码块（多语言风格）
+这是多行代码块（多语言风格）
+（```）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://pic.idzd.top/usr/uploads/2020/03/12/271743437228973.png"></p>
 <hr>
@@ -503,7 +551,10 @@ Markdown 语法参考Typecho和hexo，都使用 Markdown 作为其内容书写�
 </li>
 <li>原生语法要求用 <code>|</code>包围整个表格。部分解析引擎可以省略。</li>
 </ul>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">表头|表头|表头</span><br><span class="line">---|:--:|---:</span><br><span class="line">内容|内容|内容</span><br><span class="line">内容|内容|内容</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">表头|表头|表头
+---|:--:|---:
+内容|内容|内容
+内容|内容|内容<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://pic.idzd.top/usr/uploads/2020/03/12/26424189632383.png"></p>
 <p>markdown 表格效果，为了美观我的主题锁定了表格对齐方式</p>
@@ -515,7 +566,7 @@ Markdown 语法参考Typecho和hexo，都使用 Markdown 作为其内容书写�
 <p>&#x20;                                                           Markdown 流程图效果&#x20;</p>
 <hr>
 <h2 id="Markdown-脚注"><a href="#Markdown-脚注" class="headerlink" title="Markdown 脚注"></a>Markdown 脚注</h2><p>Markdown 通过 <code>需要脚注的部分 + [^ 脚注内容]</code>，来插入一个脚注。</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是脚注[^这里是 <span class="strong">**脚注**</span> 的 <span class="emphasis">*内容*</span>.].</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">这是脚注[^这里是 <span class="token bold"><span class="token punctuation">**</span><span class="token content">脚注</span><span class="token punctuation">**</span></span> 的 <span class="token italic"><span class="token punctuation">*</span><span class="token content">内容</span><span class="token punctuation">*</span></span>.].<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>这是脚注<a target="_blank" rel="noopener" href="https://www.idzd.top/archives/1439/#fn-1" title="1">1</a>.</p>
 <hr>

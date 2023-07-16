@@ -467,21 +467,46 @@ Git是一个分布式版本控制系统。
 <p>个人不建议从官网下载，贼慢！您可以考虑从<a target="_blank" rel="noopener" href="https://github.com/git-for-windows/git/releases/" title="这里">这里</a>下载。</p>
 <p>然后疯狂下一步即可。</p>
 <h3 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h3><p><strong>1.使用包管理工具安装(推荐)</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#readhat centos</span></span><br><span class="line">sudo yum install git</span><br><span class="line"></span><br><span class="line"><span class="comment">#debian ubuntu deepin</span></span><br><span class="line">sudo apt-get install git</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#readhat centos</span>
+<span class="token function">sudo</span> yum <span class="token function">install</span> <span class="token function">git</span>
+
+<span class="token comment">#debian ubuntu deepin</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token function">git</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>2.下载二进制文件</strong></p>
 <p>访问<a target="_blank" rel="noopener" href="https://http//git-scm.com/download/linux" title="官网">官网</a>下载并安装。</p>
 <p><strong>3.编译安装</strong></p>
 <p>访问<a target="_blank" rel="noopener" href="https://github.com/git/git" title="项目地址">项目地址</a>下载源代码并编译安装。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#编译安装</span></span><br><span class="line">tar -zxf git.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> git</span><br><span class="line"></span><br><span class="line">make configure</span><br><span class="line"></span><br><span class="line">./configure --prefix=/usr</span><br><span class="line"></span><br><span class="line">make all doc info</span><br><span class="line"></span><br><span class="line">sudo make install install-doc install-html install-info</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#编译安装</span>
+<span class="token function">tar</span> <span class="token parameter variable">-zxf</span> git.tar.gz
+
+<span class="token builtin class-name">cd</span> <span class="token function">git</span>
+
+<span class="token function">make</span> configure
+
+./configure <span class="token parameter variable">--prefix</span><span class="token operator">=</span>/usr
+
+<span class="token function">make</span> all doc info
+
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span> install-doc install-html install-info
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><p>请先访问<a target="_blank" rel="noopener" href="https://http//git-scm.com/download/mac" title="官网">官网</a>下载并安装。</p>
 <hr>
 <h2 id="首次运行Git时需要的配置"><a href="#首次运行Git时需要的配置" class="headerlink" title="首次运行Git时需要的配置"></a>首次运行Git时需要的配置</h2><p><strong>设置相关信息</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置用户名</span></span><br><span class="line">git config --global [user.name](http://user.name) <span class="string">&quot;你的用户名&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置电子邮件</span></span><br><span class="line"></span><br><span class="line">git config --global user.email <span class="string">&quot;你的电子邮件地址&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#设置用户名</span>
+<span class="token function">git</span> config <span class="token parameter variable">--global</span> <span class="token punctuation">[</span>user.name<span class="token punctuation">]</span><span class="token punctuation">(</span>http://user.name<span class="token punctuation">)</span> <span class="token string">"你的用户名"</span>
+
+<span class="token comment">#设置电子邮件</span>
+
+<span class="token function">git</span> config <span class="token parameter variable">--global</span> user.email <span class="token string">"你的电子邮件地址"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>查看配置信息</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#列出配置信息</span></span><br><span class="line">git config --list</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#列出配置信息</span>
+<span class="token function">git</span> config <span class="token parameter variable">--list</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <blockquote>
 <p><strong>相关知识</strong>Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在三个不同的位置：</p>
@@ -491,47 +516,127 @@ Git是一个分布式版本控制系统。
 </blockquote>
 <hr>
 <h2 id="获取Git仓库"><a href="#获取Git仓库" class="headerlink" title="获取Git仓库"></a>获取Git仓库</h2><h3 id="在已有目录中创建仓库"><a href="#在已有目录中创建仓库" class="headerlink" title="在已有目录中创建仓库"></a>在已有目录中创建仓库</h3><p>1.首先进入到你要建立git仓库的目录内。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#进入到项目位置</span></span><br><span class="line"><span class="built_in">cd</span> D:\WORK\ideaProjects\<span class="built_in">test</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#进入到项目位置</span>
+<span class="token builtin class-name">cd</span> D:<span class="token punctuation">\</span>WORK<span class="token punctuation">\</span>ideaProjects<span class="token punctuation">\</span>test
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>2.创建仓库</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#初始化Git仓库</span></span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#初始化Git仓库</span>
+<span class="token function">git</span> init<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>之后你会在这个目录下发现一个 <code>.git</code> 的目录，这个目录就是Git用来跟踪管理版本库的，由Git自动管理，没事不要动。</p>
 <blockquote>
 <p>千万不要用Windows自带的<strong>记事本</strong>编辑任何文本文件。会导致文件编码异常，建议用第三方软件处理。比如<a target="_blank" rel="noopener" href="https://notepad-plus-plus.org/download" title="notepad++">notepad++</a>、<a target="_blank" rel="noopener" href="https://www.dcloud.io/hbuilderx.html" title="HBuilderX">HBuilderX</a>、<a target="_blank" rel="noopener" href="https://www.editplus.com/" title="EditPlus">EditPlus</a>。</p>
 </blockquote>
-<h3 id="克隆一个仓库"><a href="#克隆一个仓库" class="headerlink" title="克隆一个仓库"></a>克隆一个仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#克隆一个仓库</span></span><br><span class="line">git <span class="built_in">clone</span> 仓库地址</span><br><span class="line"></span><br><span class="line"><span class="comment">#例子：克隆git官方仓库</span></span><br><span class="line">git <span class="built_in">clone</span> [https://github.com/git/git](https://github.com/git/git)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="克隆一个仓库"><a href="#克隆一个仓库" class="headerlink" title="克隆一个仓库"></a>克隆一个仓库</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#克隆一个仓库</span>
+<span class="token function">git</span> clone 仓库地址
+
+<span class="token comment">#例子：克隆git官方仓库</span>
+<span class="token function">git</span> clone <span class="token punctuation">[</span>https://github.com/git/git<span class="token punctuation">]</span><span class="token punctuation">(</span>https://github.com/git/git<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <hr>
-<h2 id="向Git仓库内添加文件"><a href="#向Git仓库内添加文件" class="headerlink" title="向Git仓库内添加文件"></a>向Git仓库内添加文件</h2><h3 id="将文件添加到暂存区"><a href="#将文件添加到暂存区" class="headerlink" title="将文件添加到暂存区"></a>将文件添加到暂存区</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#添加文件到暂存区</span></span><br><span class="line">git add README.md</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="向Git仓库内添加文件"><a href="#向Git仓库内添加文件" class="headerlink" title="向Git仓库内添加文件"></a>向Git仓库内添加文件</h2><h3 id="将文件添加到暂存区"><a href="#将文件添加到暂存区" class="headerlink" title="将文件添加到暂存区"></a>将文件添加到暂存区</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#添加文件到暂存区</span>
+<span class="token function">git</span> <span class="token function">add</span> README.md
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p><a target="_blank" rel="noopener" href="http://readme.md/" title="README.md"><em><strong>README.md</strong></em></a>*** 文件是这个项目或仓库的说明文件，建议每一Git仓都有一个***​</p>
-<h3 id="提交文件到仓库"><a href="#提交文件到仓库" class="headerlink" title="提交文件到仓库"></a>提交文件到仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#提交文件到仓库</span></span><br><span class="line">git commit -m <span class="string">&quot;本次提交文件的备注或是说明&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="提交文件到仓库"><a href="#提交文件到仓库" class="headerlink" title="提交文件到仓库"></a>提交文件到仓库</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#提交文件到仓库</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"本次提交文件的备注或是说明"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="检查文件-们-当前状态"><a href="#检查文件-们-当前状态" class="headerlink" title="检查文件(们)当前状态"></a>检查文件(们)当前状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#检查文件(们)当前状态（详细）</span></span><br><span class="line"></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment">#检查文件(们)当前状态（简略，常用）</span></span><br><span class="line"></span><br><span class="line">git status -s</span><br></pre></td></tr></table></figure>
+<h3 id="检查文件-们-当前状态"><a href="#检查文件-们-当前状态" class="headerlink" title="检查文件(们)当前状态"></a>检查文件(们)当前状态</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#检查文件(们)当前状态（详细）</span>
 
-<h3 id="检查已暂存和未暂存文件的修改"><a href="#检查已暂存和未暂存文件的修改" class="headerlink" title="检查已暂存和未暂存文件的修改"></a>检查已暂存和未暂存文件的修改</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看尚未暂存的文件修改了哪些部分，也就是修改之后还没有暂存起来的变化内容</span></span><br><span class="line"></span><br><span class="line">git diff</span><br><span class="line"></span><br><span class="line"><span class="comment">#要查看已暂存的将要添加到下次提交里的内容</span></span><br><span class="line"></span><br><span class="line">git diff --cached</span><br><span class="line"></span><br><span class="line"><span class="comment">#或 (这个貌似更好记，1.6.1以上版本可用)</span></span><br><span class="line"></span><br><span class="line">git diff --staged</span><br></pre></td></tr></table></figure>
+<span class="token function">git</span> status
+
+<span class="token comment">#检查文件(们)当前状态（简略，常用）</span>
+
+<span class="token function">git</span> status <span class="token parameter variable">-s</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="检查已暂存和未暂存文件的修改"><a href="#检查已暂存和未暂存文件的修改" class="headerlink" title="检查已暂存和未暂存文件的修改"></a>检查已暂存和未暂存文件的修改</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#查看尚未暂存的文件修改了哪些部分，也就是修改之后还没有暂存起来的变化内容</span>
+
+<span class="token function">git</span> <span class="token function">diff</span>
+
+<span class="token comment">#要查看已暂存的将要添加到下次提交里的内容</span>
+
+<span class="token function">git</span> <span class="token function">diff</span> <span class="token parameter variable">--cached</span>
+
+<span class="token comment">#或 (这个貌似更好记，1.6.1以上版本可用)</span>
+
+<span class="token function">git</span> <span class="token function">diff</span> <span class="token parameter variable">--staged</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><em>git diff 本身只显示尚未暂存的改动，而不是自上次提交以来所做的所有改动。 所以有时候你一下子暂存了所有更新过的文件后，运行 git diff 后却什么也没有，就是这个原因。</em></p>
 <hr>
-<h2 id="版本退回"><a href="#版本退回" class="headerlink" title="版本退回"></a>版本退回</h2><h3 id="查看文件的提交记录"><a href="#查看文件的提交记录" class="headerlink" title="查看文件的提交记录"></a>查看文件的提交记录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看提交记录</span></span><br><span class="line"></span><br><span class="line">git <span class="built_in">log</span> --pretty=oneline</span><br></pre></td></tr></table></figure>
+<h2 id="版本退回"><a href="#版本退回" class="headerlink" title="版本退回"></a>版本退回</h2><h3 id="查看文件的提交记录"><a href="#查看文件的提交记录" class="headerlink" title="查看文件的提交记录"></a>查看文件的提交记录</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#查看提交记录</span>
+
+<span class="token function">git</span> log <span class="token parameter variable">--pretty</span><span class="token operator">=</span>oneline<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>当然你可以直接使用 <code>git log</code> 查看提交记录，不过这会输出很多东西，看着比较闹腾。</p>
-<h3 id="文件版本退回"><a href="#文件版本退回" class="headerlink" title="文件版本退回"></a>文件版本退回</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#退回到上个版本</span></span><br><span class="line"></span><br><span class="line">git reset --hard HEAD^</span><br><span class="line"></span><br><span class="line"><span class="comment">#退回到上上个版本</span></span><br><span class="line"></span><br><span class="line">git reset --hard HEAD^^</span><br><span class="line"></span><br><span class="line"><span class="comment">#退回到上上上个版本</span></span><br><span class="line"></span><br><span class="line">git reset --hard HEAD^^^</span><br><span class="line"></span><br><span class="line"><span class="comment">#退回到100个版本之前</span></span><br><span class="line"></span><br><span class="line">git reset --hard HEAD~100</span><br></pre></td></tr></table></figure>
+<h3 id="文件版本退回"><a href="#文件版本退回" class="headerlink" title="文件版本退回"></a>文件版本退回</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#退回到上个版本</span>
+
+<span class="token function">git</span> reset <span class="token parameter variable">--hard</span> HEAD^
+
+<span class="token comment">#退回到上上个版本</span>
+
+<span class="token function">git</span> reset <span class="token parameter variable">--hard</span> HEAD^^
+
+<span class="token comment">#退回到上上上个版本</span>
+
+<span class="token function">git</span> reset <span class="token parameter variable">--hard</span> HEAD^^^
+
+<span class="token comment">#退回到100个版本之前</span>
+
+<span class="token function">git</span> reset <span class="token parameter variable">--hard</span> HEAD~100<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>如果你版本退回错了怎么办？</strong></p>
 <p><img src="https://pic.idzd.top/usr/uploads/2019/11/3151242179.png"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">commit_id</span><br><span class="line"><span class="comment">#查看你的命令记录</span></span><br><span class="line"></span><br><span class="line">git reflog</span><br><span class="line"></span><br><span class="line"><span class="comment">#撤回到指定记录前</span></span><br><span class="line"></span><br><span class="line">git reset --hard commit_id</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">commit_id
+<span class="token comment">#查看你的命令记录</span>
+
+<span class="token function">git</span> reflog
+
+<span class="token comment">#撤回到指定记录前</span>
+
+<span class="token function">git</span> reset <span class="token parameter variable">--hard</span> commit_id
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <hr>
-<h2 id="连接远程仓库"><a href="#连接远程仓库" class="headerlink" title="连接远程仓库"></a>连接远程仓库</h2><h3 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#添加远程仓库</span></span><br><span class="line">git remote add origin 你远程仓库地址</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="连接远程仓库"><a href="#连接远程仓库" class="headerlink" title="连接远程仓库"></a>连接远程仓库</h2><h3 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#添加远程仓库</span>
+<span class="token function">git</span> remote <span class="token function">add</span> origin 你远程仓库地址
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>我们一般用 origin 作为远程仓库的名字，这也是Git的默认称呼，当然也可用别的。</p>
-<h3 id="推送到远程仓库"><a href="#推送到远程仓库" class="headerlink" title="推送到远程仓库"></a>推送到远程仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#推送到远程仓库</span></span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line"><span class="comment">#强制推送到远程仓库(谨慎使用)</span></span><br><span class="line"></span><br><span class="line">git push -f origin master</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="推送到远程仓库"><a href="#推送到远程仓库" class="headerlink" title="推送到远程仓库"></a>推送到远程仓库</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#推送到远程仓库</span>
+<span class="token function">git</span> push <span class="token parameter variable">-u</span> origin master
+
+<span class="token comment">#强制推送到远程仓库(谨慎使用)</span>
+
+<span class="token function">git</span> push <span class="token parameter variable">-f</span> origin master
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>我们第一次推送master分支时，加上了 <code>-u</code> 参数，Git不但会把本地的 master 分支内容推送的远程新的 master 分支，还会把本地的 master 分支和远程的 master 分支关联起来，在以后的推送或者拉取时就可以使用简化命令了。</p>
 <hr>
-<h2 id="连接云端"><a href="#连接云端" class="headerlink" title="连接云端"></a>连接云端</h2><h3 id="生成SSH密钥"><a href="#生成SSH密钥" class="headerlink" title="生成SSH密钥"></a>生成SSH密钥</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#切换到个人目录，win在C:\Users\你的用户名\</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"></span><br><span class="line"><span class="comment">#生成SSH密钥</span></span><br><span class="line"></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你的邮箱&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#询问是否生成 按回车</span></span><br><span class="line"></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line"></span><br><span class="line"><span class="comment">#密钥保存位置 回车使用默认位置，win在C:\Users\你的用户名.ssh\下</span></span><br><span class="line"></span><br><span class="line">file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (c/User/%USERNAME%/.ssh/id_rsa):</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用密钥的密码，可以不设，回车即可</span></span><br><span class="line"></span><br><span class="line">passphrase (empty <span class="keyword">for</span> no passphrase):</span><br><span class="line"></span><br><span class="line">same passphrase again:</span><br></pre></td></tr></table></figure>
+<h2 id="连接云端"><a href="#连接云端" class="headerlink" title="连接云端"></a>连接云端</h2><h3 id="生成SSH密钥"><a href="#生成SSH密钥" class="headerlink" title="生成SSH密钥"></a>生成SSH密钥</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#切换到个人目录，win在C:\Users\你的用户名\</span>
+
+<span class="token builtin class-name">cd</span> ~
+
+<span class="token comment">#生成SSH密钥</span>
+
+ssh-keygen <span class="token parameter variable">-t</span> rsa <span class="token parameter variable">-C</span> <span class="token string">"你的邮箱"</span>
+
+<span class="token comment">#询问是否生成 按回车</span>
+
+Generating public/private rsa key pair.
+
+<span class="token comment">#密钥保存位置 回车使用默认位置，win在C:\Users\你的用户名.ssh\下</span>
+
+<span class="token function">file</span> <span class="token keyword">in</span> <span class="token function">which</span> to save the key <span class="token punctuation">(</span>c/User/%USERNAME%/.ssh/id_rsa<span class="token punctuation">)</span>:
+
+<span class="token comment">#使用密钥的密码，可以不设，回车即可</span>
+
+passphrase <span class="token punctuation">(</span>empty <span class="token keyword">for</span> no passphrase<span class="token punctuation">)</span>:
+
+same passphrase again:<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="上传公钥到GitHub"><a href="#上传公钥到GitHub" class="headerlink" title="上传公钥到GitHub"></a>上传公钥到GitHub</h3><p>1.登陆<a target="_blank" rel="noopener" href="https://github.com/" title="GitHub">GitHub</a>2.点击右上角你的头像&gt;打开菜单&gt;选择设置(Settings)3.在左侧，侧边栏中点击<a target="_blank" rel="noopener" href="https://github.com/settings/keys" title="SSH and GPG keys">SSH and GPG keys</a>4.点击右侧绿色 New SSH key 按钮5.打开 <code>~.ssh</code> 目录，用第三方软件打开 id_rsa.pub 文件，填入到key下面的文本框内。6.点击 add 按钮7.ok</p>
 <p><strong>注意：请妥善保管好私钥 id_rsa 不要泄露给任何人。</strong></p>

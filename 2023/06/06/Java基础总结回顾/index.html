@@ -421,36 +421,308 @@ SPI概述SPI全称为(Service Provider Interface) ，是JDK内置的一种服务
 
 <hr>
 <h2 id="SPI概述"><a href="#SPI概述" class="headerlink" title="SPI概述"></a>SPI概述</h2><p>SPI全称为(Service Provider Interface) ，是JDK内置的一种服务提供发现机制；主要被框架的开发人员使用，比如java.sql.Driver接口，数据库厂商实现此接口即可，当然要想让系统知道具体实现类的存在，还需要使用固定的存放规则，需要在classpath下的META-INF&#x2F;services&#x2F;目录里创建一个以服务接口命名的文件，这个文件里的内容就是这个接口的具体的实现类；下面以JDBC为实例来进行具体的分析。</p>
-<h2 id="JDBC驱动"><a href="#JDBC驱动" class="headerlink" title="JDBC驱动"></a>JDBC驱动</h2><h3 id="1-准备驱动包"><a href="#1-准备驱动包" class="headerlink" title="1.准备驱动包"></a>1.准备驱动包</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;5.1.47&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.postgresql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;postgresql&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;42.2.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.microsoft.sqlserver&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mssql-jdbc&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;7.0.0.jre8&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="JDBC驱动"><a href="#JDBC驱动" class="headerlink" title="JDBC驱动"></a>JDBC驱动</h2><h3 id="1-准备驱动包"><a href="#1-准备驱动包" class="headerlink" title="1.准备驱动包"></a>1.准备驱动包</h3><pre class="line-numbers language-none"><code class="language-none">&lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;5.1.47&lt;&#x2F;version&gt;
+        &lt;&#x2F;dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.postgresql&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;postgresql&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;42.2.2&lt;&#x2F;version&gt;
+        &lt;&#x2F;dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.microsoft.sqlserver&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;mssql-jdbc&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;7.0.0.jre8&lt;&#x2F;version&gt;
+        &lt;&#x2F;dependency&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>分别准备了mysql，postgresql和sqlserver，可以打开jar，发现每个jar包的META-INF&#x2F;services&#x2F;都存在一个java.sql.Driver文件，文件里面存在一个或多个类名，比如mysql：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">com.mysql.jdbc.Driver</span><br><span class="line">com.mysql.fabric.jdbc.FabricMySQLDriver</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">com.mysql.jdbc.Driver
+com.mysql.fabric.jdbc.FabricMySQLDriver<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>提供的每个驱动类占据一行，解析的时候会按行读取，具体使用哪个会根据url来决定；</p>
-<h3 id="2-简单实例"><a href="#2-简单实例" class="headerlink" title="2.简单实例"></a>2.简单实例</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String url = &quot;jdbc:mysql://localhost:3306/db3&quot;;</span><br><span class="line">String username = &quot;root&quot;;</span><br><span class="line">String password = &quot;root&quot;;</span><br><span class="line">String sql = &quot;update travelrecord set name=\&#x27;bbb\&#x27; where id=1&quot;;</span><br><span class="line">Connection con = DriverManager.getConnection(url, username, password);</span><br></pre></td></tr></table></figure>
+<h3 id="2-简单实例"><a href="#2-简单实例" class="headerlink" title="2.简单实例"></a>2.简单实例</h3><pre class="line-numbers language-none"><code class="language-none">String url &#x3D; &quot;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;db3&quot;;
+String username &#x3D; &quot;root&quot;;
+String password &#x3D; &quot;root&quot;;
+String sql &#x3D; &quot;update travelrecord set name&#x3D;\&#39;bbb\&#39; where id&#x3D;1&quot;;
+Connection con &#x3D; DriverManager.getConnection(url, username, password);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>类路径下存在多个驱动包，具体在使用DriverManager.getConnection应该使用哪个驱动类会解析url来识别，不同的数据库有不同的url前缀；</p>
 <h3 id="3-驱动类加载分析"><a href="#3-驱动类加载分析" class="headerlink" title="3.驱动类加载分析"></a>3.驱动类加载分析</h3><p>具体META-INF&#x2F;services&#x2F;下的驱动类是什么时候加载的，DriverManager有一个静态代码块：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">static &#123;</span><br><span class="line">    loadInitialDrivers();</span><br><span class="line">    println(&quot;JDBC DriverManager initialized&quot;);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">private static void loadInitialDrivers() &#123;</span><br><span class="line">    String drivers;</span><br><span class="line">    try &#123;</span><br><span class="line">        drivers = AccessController.doPrivileged(new PrivilegedAction&lt;String&gt;() &#123;</span><br><span class="line">            public String run() &#123;</span><br><span class="line">                return System.getProperty(&quot;jdbc.drivers&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; catch (Exception ex) &#123;</span><br><span class="line">        drivers = null;</span><br><span class="line">    &#125;</span><br><span class="line">    // If the driver is packaged as a Service Provider, load it.</span><br><span class="line">    // Get all the drivers through the classloader</span><br><span class="line">    // exposed as a java.sql.Driver.class service.</span><br><span class="line">    // ServiceLoader.load() replaces the sun.misc.Providers()</span><br><span class="line"> </span><br><span class="line">    AccessController.doPrivileged(new PrivilegedAction&lt;Void&gt;() &#123;</span><br><span class="line">        public Void run() &#123;</span><br><span class="line"> </span><br><span class="line">            ServiceLoader&lt;Driver&gt; loadedDrivers = ServiceLoader.load(Driver.class);</span><br><span class="line">            Iterator&lt;Driver&gt; driversIterator = loadedDrivers.iterator();</span><br><span class="line"> </span><br><span class="line">            /* Load these drivers, so that they can be instantiated.</span><br><span class="line">             * It may be the case that the driver class may not be there</span><br><span class="line">             * i.e. there may be a packaged driver with the service class</span><br><span class="line">             * as implementation of java.sql.Driver but the actual class</span><br><span class="line">             * may be missing. In that case a java.util.ServiceConfigurationError</span><br><span class="line">             * will be thrown at runtime by the VM trying to locate</span><br><span class="line">             * and load the service.</span><br><span class="line">             *</span><br><span class="line">             * Adding a try catch block to catch those runtime errors</span><br><span class="line">             * if driver not available in classpath but it&#x27;s</span><br><span class="line">             * packaged as service and that service is there in classpath.</span><br><span class="line">             */</span><br><span class="line">            try&#123;</span><br><span class="line">                while(driversIterator.hasNext()) &#123;</span><br><span class="line">                    driversIterator.next();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; catch(Throwable t) &#123;</span><br><span class="line">            // Do nothing</span><br><span class="line">            &#125;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"> </span><br><span class="line">    println(&quot;DriverManager.initialize: jdbc.drivers = &quot; + drivers);</span><br><span class="line"> </span><br><span class="line">    if (drivers == null || drivers.equals(&quot;&quot;)) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    String[] driversList = drivers.split(&quot;:&quot;);</span><br><span class="line">    println(&quot;number of Drivers:&quot; + driversList.length);</span><br><span class="line">    for (String aDriver : driversList) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            println(&quot;DriverManager.Initialize: loading &quot; + aDriver);</span><br><span class="line">            Class.forName(aDriver, true,</span><br><span class="line">                    ClassLoader.getSystemClassLoader());</span><br><span class="line">        &#125; catch (Exception ex) &#123;</span><br><span class="line">            println(&quot;DriverManager.Initialize: load failed: &quot; + ex);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">static &#123;
+    loadInitialDrivers();
+    println(&quot;JDBC DriverManager initialized&quot;);
+&#125;
+ 
+private static void loadInitialDrivers() &#123;
+    String drivers;
+    try &#123;
+        drivers &#x3D; AccessController.doPrivileged(new PrivilegedAction&lt;String&gt;() &#123;
+            public String run() &#123;
+                return System.getProperty(&quot;jdbc.drivers&quot;);
+            &#125;
+        &#125;);
+    &#125; catch (Exception ex) &#123;
+        drivers &#x3D; null;
+    &#125;
+    &#x2F;&#x2F; If the driver is packaged as a Service Provider, load it.
+    &#x2F;&#x2F; Get all the drivers through the classloader
+    &#x2F;&#x2F; exposed as a java.sql.Driver.class service.
+    &#x2F;&#x2F; ServiceLoader.load() replaces the sun.misc.Providers()
+ 
+    AccessController.doPrivileged(new PrivilegedAction&lt;Void&gt;() &#123;
+        public Void run() &#123;
+ 
+            ServiceLoader&lt;Driver&gt; loadedDrivers &#x3D; ServiceLoader.load(Driver.class);
+            Iterator&lt;Driver&gt; driversIterator &#x3D; loadedDrivers.iterator();
+ 
+            &#x2F;* Load these drivers, so that they can be instantiated.
+             * It may be the case that the driver class may not be there
+             * i.e. there may be a packaged driver with the service class
+             * as implementation of java.sql.Driver but the actual class
+             * may be missing. In that case a java.util.ServiceConfigurationError
+             * will be thrown at runtime by the VM trying to locate
+             * and load the service.
+             *
+             * Adding a try catch block to catch those runtime errors
+             * if driver not available in classpath but it&#39;s
+             * packaged as service and that service is there in classpath.
+             *&#x2F;
+            try&#123;
+                while(driversIterator.hasNext()) &#123;
+                    driversIterator.next();
+                &#125;
+            &#125; catch(Throwable t) &#123;
+            &#x2F;&#x2F; Do nothing
+            &#125;
+            return null;
+        &#125;
+    &#125;);
+ 
+    println(&quot;DriverManager.initialize: jdbc.drivers &#x3D; &quot; + drivers);
+ 
+    if (drivers &#x3D;&#x3D; null || drivers.equals(&quot;&quot;)) &#123;
+        return;
+    &#125;
+    String[] driversList &#x3D; drivers.split(&quot;:&quot;);
+    println(&quot;number of Drivers:&quot; + driversList.length);
+    for (String aDriver : driversList) &#123;
+        try &#123;
+            println(&quot;DriverManager.Initialize: loading &quot; + aDriver);
+            Class.forName(aDriver, true,
+                    ClassLoader.getSystemClassLoader());
+        &#125; catch (Exception ex) &#123;
+            println(&quot;DriverManager.Initialize: load failed: &quot; + ex);
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>在加载DriverManager类的时候会执行loadInitialDrivers方法，方法内通过了两种加载驱动类的方式，分别是：使用系统变量方式和ServiceLoader加载方式；系统变量方式其实就是在变量jdbc.drivers中配置好驱动类，然后使用Class.forName进行加载；下面重点看一下ServiceLoader方式，此处调用了load方法但是并没有真正去加载驱动类，而是返回了一个LazyIterator，后面的代码就是循环变量迭代器：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">private static final String PREFIX = &quot;META-INF/services/&quot;;</span><br><span class="line"> </span><br><span class="line">private class LazyIterator</span><br><span class="line">        implements Iterator&lt;S&gt;</span><br><span class="line">    &#123;</span><br><span class="line"> </span><br><span class="line">        Class&lt;S&gt; service;</span><br><span class="line">        ClassLoader loader;</span><br><span class="line">        Enumeration&lt;URL&gt; configs = null;</span><br><span class="line">        Iterator&lt;String&gt; pending = null;</span><br><span class="line">        String nextName = null;</span><br><span class="line"> </span><br><span class="line">        private LazyIterator(Class&lt;S&gt; service, ClassLoader loader) &#123;</span><br><span class="line">            this.service = service;</span><br><span class="line">            this.loader = loader;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        private boolean hasNextService() &#123;</span><br><span class="line">            if (nextName != null) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">            if (configs == null) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    String fullName = PREFIX + service.getName();</span><br><span class="line">                    if (loader == null)</span><br><span class="line">                        configs = ClassLoader.getSystemResources(fullName);</span><br><span class="line">                    else</span><br><span class="line">                        configs = loader.getResources(fullName);</span><br><span class="line">                &#125; catch (IOException x) &#123;</span><br><span class="line">                    fail(service, &quot;Error locating configuration files&quot;, x);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            while ((pending == null) || !pending.hasNext()) &#123;</span><br><span class="line">                if (!configs.hasMoreElements()) &#123;</span><br><span class="line">                    return false;</span><br><span class="line">                &#125;</span><br><span class="line">                pending = parse(service, configs.nextElement());</span><br><span class="line">            &#125;</span><br><span class="line">            nextName = pending.next();</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        private S nextService() &#123;</span><br><span class="line">            if (!hasNextService())</span><br><span class="line">                throw new NoSuchElementException();</span><br><span class="line">            String cn = nextName;</span><br><span class="line">            nextName = null;</span><br><span class="line">            Class&lt;?&gt; c = null;</span><br><span class="line">            try &#123;</span><br><span class="line">                c = Class.forName(cn, false, loader);</span><br><span class="line">            &#125; catch (ClassNotFoundException x) &#123;</span><br><span class="line">                fail(service,</span><br><span class="line">                     &quot;Provider &quot; + cn + &quot; not found&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            if (!service.isAssignableFrom(c)) &#123;</span><br><span class="line">                fail(service,</span><br><span class="line">                     &quot;Provider &quot; + cn  + &quot; not a subtype&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            try &#123;</span><br><span class="line">                S p = service.cast(c.newInstance());</span><br><span class="line">                providers.put(cn, p);</span><br><span class="line">                return p;</span><br><span class="line">            &#125; catch (Throwable x) &#123;</span><br><span class="line">                fail(service,</span><br><span class="line">                     &quot;Provider &quot; + cn + &quot; could not be instantiated&quot;,</span><br><span class="line">                     x);</span><br><span class="line">            &#125;</span><br><span class="line">            throw new Error();          // This cannot happen</span><br><span class="line">        &#125;</span><br><span class="line">        ......</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">private static final String PREFIX &#x3D; &quot;META-INF&#x2F;services&#x2F;&quot;;
+ 
+private class LazyIterator
+        implements Iterator&lt;S&gt;
+    &#123;
+ 
+        Class&lt;S&gt; service;
+        ClassLoader loader;
+        Enumeration&lt;URL&gt; configs &#x3D; null;
+        Iterator&lt;String&gt; pending &#x3D; null;
+        String nextName &#x3D; null;
+ 
+        private LazyIterator(Class&lt;S&gt; service, ClassLoader loader) &#123;
+            this.service &#x3D; service;
+            this.loader &#x3D; loader;
+        &#125;
+ 
+        private boolean hasNextService() &#123;
+            if (nextName !&#x3D; null) &#123;
+                return true;
+            &#125;
+            if (configs &#x3D;&#x3D; null) &#123;
+                try &#123;
+                    String fullName &#x3D; PREFIX + service.getName();
+                    if (loader &#x3D;&#x3D; null)
+                        configs &#x3D; ClassLoader.getSystemResources(fullName);
+                    else
+                        configs &#x3D; loader.getResources(fullName);
+                &#125; catch (IOException x) &#123;
+                    fail(service, &quot;Error locating configuration files&quot;, x);
+                &#125;
+            &#125;
+            while ((pending &#x3D;&#x3D; null) || !pending.hasNext()) &#123;
+                if (!configs.hasMoreElements()) &#123;
+                    return false;
+                &#125;
+                pending &#x3D; parse(service, configs.nextElement());
+            &#125;
+            nextName &#x3D; pending.next();
+            return true;
+        &#125;
+ 
+        private S nextService() &#123;
+            if (!hasNextService())
+                throw new NoSuchElementException();
+            String cn &#x3D; nextName;
+            nextName &#x3D; null;
+            Class&lt;?&gt; c &#x3D; null;
+            try &#123;
+                c &#x3D; Class.forName(cn, false, loader);
+            &#125; catch (ClassNotFoundException x) &#123;
+                fail(service,
+                     &quot;Provider &quot; + cn + &quot; not found&quot;);
+            &#125;
+            if (!service.isAssignableFrom(c)) &#123;
+                fail(service,
+                     &quot;Provider &quot; + cn  + &quot; not a subtype&quot;);
+            &#125;
+            try &#123;
+                S p &#x3D; service.cast(c.newInstance());
+                providers.put(cn, p);
+                return p;
+            &#125; catch (Throwable x) &#123;
+                fail(service,
+                     &quot;Provider &quot; + cn + &quot; could not be instantiated&quot;,
+                     x);
+            &#125;
+            throw new Error();          &#x2F;&#x2F; This cannot happen
+        &#125;
+        ......
+    &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>类中指定了一个静态常量PREFIX &#x3D; “META-INF&#x2F;services&#x2F;”，然后和java.sql.Driver拼接组成了fullName，然后通过类加载器去获取所有类路径下java.sql.Driver文件，获取之后存放在configs中，里面的每个元素对应一个文件，每个文件中可能会存在多个驱动类，所以使用pending用来存放每个文件中的驱动信息，获取驱动信息之后在nextService中使用Class.forName加载类信息，并且指定不进行初始化；同时在下面使用newInstance对驱动类进行了实例化操作；每个驱动类中都提供了一个静态注册代码块，比如mysql：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">static &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        java.sql.DriverManager.registerDriver(new Driver());</span><br><span class="line">    &#125; catch (SQLException E) &#123;</span><br><span class="line">        throw new RuntimeException(&quot;Can&#x27;t register driver!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">static &#123;
+    try &#123;
+        java.sql.DriverManager.registerDriver(new Driver());
+    &#125; catch (SQLException E) &#123;
+        throw new RuntimeException(&quot;Can&#39;t register driver!&quot;);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>这里又实例化了一个驱动类，同时注册到DriverManager；接下来就是调用DriverManager的getConnection方法，代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">private static Connection getConnection(</span><br><span class="line">       String url, java.util.Properties info, Class&lt;?&gt; caller) throws SQLException &#123;</span><br><span class="line">       /*</span><br><span class="line">        * When callerCl is null, we should check the application&#x27;s</span><br><span class="line">        * (which is invoking this class indirectly)</span><br><span class="line">        * classloader, so that the JDBC driver class outside rt.jar</span><br><span class="line">        * can be loaded from here.</span><br><span class="line">        */</span><br><span class="line">       ClassLoader callerCL = caller != null ? caller.getClassLoader() : null;</span><br><span class="line">       synchronized(DriverManager.class) &#123;</span><br><span class="line">           // synchronize loading of the correct classloader.</span><br><span class="line">           if (callerCL == null) &#123;</span><br><span class="line">               callerCL = Thread.currentThread().getContextClassLoader();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"> </span><br><span class="line">       if(url == null) &#123;</span><br><span class="line">           throw new SQLException(&quot;The url cannot be null&quot;, &quot;08001&quot;);</span><br><span class="line">       &#125;</span><br><span class="line"> </span><br><span class="line">       println(&quot;DriverManager.getConnection(\&quot;&quot; + url + &quot;\&quot;)&quot;);</span><br><span class="line"> </span><br><span class="line">       // Walk through the loaded registeredDrivers attempting to make a connection.</span><br><span class="line">       // Remember the first exception that gets raised so we can reraise it.</span><br><span class="line">       SQLException reason = null;</span><br><span class="line"> </span><br><span class="line">       for(DriverInfo aDriver : registeredDrivers) &#123;</span><br><span class="line">           // If the caller does not have permission to load the driver then</span><br><span class="line">           // skip it.</span><br><span class="line">           if(isDriverAllowed(aDriver.driver, callerCL)) &#123;</span><br><span class="line">               try &#123;</span><br><span class="line">                   println(&quot;    trying &quot; + aDriver.driver.getClass().getName());</span><br><span class="line">                   Connection con = aDriver.driver.connect(url, info);</span><br><span class="line">                   if (con != null) &#123;</span><br><span class="line">                       // Success!</span><br><span class="line">                       println(&quot;getConnection returning &quot; + aDriver.driver.getClass().getName());</span><br><span class="line">                       return (con);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125; catch (SQLException ex) &#123;</span><br><span class="line">                   if (reason == null) &#123;</span><br><span class="line">                       reason = ex;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line"> </span><br><span class="line">           &#125; else &#123;</span><br><span class="line">               println(&quot;    skipping: &quot; + aDriver.getClass().getName());</span><br><span class="line">           &#125;</span><br><span class="line"> </span><br><span class="line">       &#125;</span><br><span class="line"> </span><br><span class="line">       // if we got here nobody could connect.</span><br><span class="line">       if (reason != null)    &#123;</span><br><span class="line">           println(&quot;getConnection failed: &quot; + reason);</span><br><span class="line">           throw reason;</span><br><span class="line">       &#125;</span><br><span class="line"> </span><br><span class="line">       println(&quot;getConnection: no suitable driver found for &quot;+ url);</span><br><span class="line">       throw new SQLException(&quot;No suitable driver found for &quot;+ url, &quot;08001&quot;);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">private static Connection getConnection(
+       String url, java.util.Properties info, Class&lt;?&gt; caller) throws SQLException &#123;
+       &#x2F;*
+        * When callerCl is null, we should check the application&#39;s
+        * (which is invoking this class indirectly)
+        * classloader, so that the JDBC driver class outside rt.jar
+        * can be loaded from here.
+        *&#x2F;
+       ClassLoader callerCL &#x3D; caller !&#x3D; null ? caller.getClassLoader() : null;
+       synchronized(DriverManager.class) &#123;
+           &#x2F;&#x2F; synchronize loading of the correct classloader.
+           if (callerCL &#x3D;&#x3D; null) &#123;
+               callerCL &#x3D; Thread.currentThread().getContextClassLoader();
+           &#125;
+       &#125;
+ 
+       if(url &#x3D;&#x3D; null) &#123;
+           throw new SQLException(&quot;The url cannot be null&quot;, &quot;08001&quot;);
+       &#125;
+ 
+       println(&quot;DriverManager.getConnection(\&quot;&quot; + url + &quot;\&quot;)&quot;);
+ 
+       &#x2F;&#x2F; Walk through the loaded registeredDrivers attempting to make a connection.
+       &#x2F;&#x2F; Remember the first exception that gets raised so we can reraise it.
+       SQLException reason &#x3D; null;
+ 
+       for(DriverInfo aDriver : registeredDrivers) &#123;
+           &#x2F;&#x2F; If the caller does not have permission to load the driver then
+           &#x2F;&#x2F; skip it.
+           if(isDriverAllowed(aDriver.driver, callerCL)) &#123;
+               try &#123;
+                   println(&quot;    trying &quot; + aDriver.driver.getClass().getName());
+                   Connection con &#x3D; aDriver.driver.connect(url, info);
+                   if (con !&#x3D; null) &#123;
+                       &#x2F;&#x2F; Success!
+                       println(&quot;getConnection returning &quot; + aDriver.driver.getClass().getName());
+                       return (con);
+                   &#125;
+               &#125; catch (SQLException ex) &#123;
+                   if (reason &#x3D;&#x3D; null) &#123;
+                       reason &#x3D; ex;
+                   &#125;
+               &#125;
+ 
+           &#125; else &#123;
+               println(&quot;    skipping: &quot; + aDriver.getClass().getName());
+           &#125;
+ 
+       &#125;
+ 
+       &#x2F;&#x2F; if we got here nobody could connect.
+       if (reason !&#x3D; null)    &#123;
+           println(&quot;getConnection failed: &quot; + reason);
+           throw reason;
+       &#125;
+ 
+       println(&quot;getConnection: no suitable driver found for &quot;+ url);
+       throw new SQLException(&quot;No suitable driver found for &quot;+ url, &quot;08001&quot;);
+   &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>此方法主要是遍历之前注册的DriverInfo，拿着url信息去每个驱动类中建立连接，当然每个驱动类中都会进行url匹配校验，成功之后返回Connection，如果中途有失败的连接并不影响尝试新的驱动连接，遍历完之后还是无法获取连接，则抛出异常；</p>
 <h3 id="4-扩展"><a href="#4-扩展" class="headerlink" title="4.扩展"></a>4.扩展</h3><p>如果想扩展新的驱动类也很简单，只需要在类路径下创建META-INF&#x2F;services&#x2F;文件夹，同时在里面创建java.sql.Driver文件，在文件中写入具体的驱动类名称，当然此类需要继承java.sql.Driver接口类；例如实例中提供的TestDriver。</p>
-<h2 id="序列化实战"><a href="#序列化实战" class="headerlink" title="序列化实战"></a>序列化实战</h2><h3 id="1-准备接口类"><a href="#1-准备接口类" class="headerlink" title="1.准备接口类"></a>1.准备接口类</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public interface Serialization &#123;</span><br><span class="line"> </span><br><span class="line">    /**</span><br><span class="line">     * 序列化</span><br><span class="line">     * </span><br><span class="line">     * @param obj</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public byte[] serialize(Object obj) throws Exception;</span><br><span class="line"> </span><br><span class="line">    /**</span><br><span class="line">     * 反序列化</span><br><span class="line">     * </span><br><span class="line">     * @param param</span><br><span class="line">     * @param clazz</span><br><span class="line">     * @return</span><br><span class="line">     * @throws Exception</span><br><span class="line">     */</span><br><span class="line">    public &lt;T&gt; T deserialize(byte[] param, Class&lt;T&gt; clazz) throws Exception;</span><br><span class="line"> </span><br><span class="line">    /**</span><br><span class="line">     * 序列化名称</span><br><span class="line">     * </span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public String getName();</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="序列化实战"><a href="#序列化实战" class="headerlink" title="序列化实战"></a>序列化实战</h2><h3 id="1-准备接口类"><a href="#1-准备接口类" class="headerlink" title="1.准备接口类"></a>1.准备接口类</h3><pre class="line-numbers language-none"><code class="language-none">public interface Serialization &#123;
+ 
+    &#x2F;**
+     * 序列化
+     * 
+     * @param obj
+     * @return
+     *&#x2F;
+    public byte[] serialize(Object obj) throws Exception;
+ 
+    &#x2F;**
+     * 反序列化
+     * 
+     * @param param
+     * @param clazz
+     * @return
+     * @throws Exception
+     *&#x2F;
+    public &lt;T&gt; T deserialize(byte[] param, Class&lt;T&gt; clazz) throws Exception;
+ 
+    &#x2F;**
+     * 序列化名称
+     * 
+     * @return
+     *&#x2F;
+    public String getName();
+ 
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="2-准备实现类"><a href="#2-准备实现类" class="headerlink" title="2.准备实现类"></a>2.准备实现类</h3><p>分别准备JsonSerialization和ProtobufSerialization</p>
 <h3 id="3-接口文件"><a href="#3-接口文件" class="headerlink" title="3.接口文件"></a>3.接口文件</h3><p>在META-INF&#x2F;services&#x2F;目录下创建文件com.spi.serializer.Serialization，内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">com.spi.serializer.JsonSerialization</span><br><span class="line">com.spi.serializer.ProtobufSerialization</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">com.spi.serializer.JsonSerialization
+com.spi.serializer.ProtobufSerialization<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="4-提供Manager类"><a href="#4-提供Manager类" class="headerlink" title="4.提供Manager类"></a>4.提供Manager类</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class SerializationManager &#123;</span><br><span class="line"> </span><br><span class="line">    private static Map&lt;String, Serialization&gt; map = new HashMap&lt;&gt;();</span><br><span class="line"> </span><br><span class="line">    static &#123;</span><br><span class="line">        loadInitialSerializer();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    private static void loadInitialSerializer() &#123;</span><br><span class="line">        ServiceLoader&lt;Serialization&gt; loadedSerializations = ServiceLoader.load(Serialization.class);</span><br><span class="line">        Iterator&lt;Serialization&gt; iterator = loadedSerializations.iterator();</span><br><span class="line"> </span><br><span class="line">        try &#123;</span><br><span class="line">            while (iterator.hasNext()) &#123;</span><br><span class="line">                Serialization serialization = iterator.next();</span><br><span class="line">                map.put(serialization.getName(), serialization);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Throwable t) &#123;</span><br><span class="line">            t.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public static Serialization getSerialization(String name) &#123;</span><br><span class="line">        return map.get(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-提供Manager类"><a href="#4-提供Manager类" class="headerlink" title="4.提供Manager类"></a>4.提供Manager类</h3><pre class="line-numbers language-none"><code class="language-none">public class SerializationManager &#123;
+ 
+    private static Map&lt;String, Serialization&gt; map &#x3D; new HashMap&lt;&gt;();
+ 
+    static &#123;
+        loadInitialSerializer();
+    &#125;
+ 
+    private static void loadInitialSerializer() &#123;
+        ServiceLoader&lt;Serialization&gt; loadedSerializations &#x3D; ServiceLoader.load(Serialization.class);
+        Iterator&lt;Serialization&gt; iterator &#x3D; loadedSerializations.iterator();
+ 
+        try &#123;
+            while (iterator.hasNext()) &#123;
+                Serialization serialization &#x3D; iterator.next();
+                map.put(serialization.getName(), serialization);
+            &#125;
+        &#125; catch (Throwable t) &#123;
+            t.printStackTrace();
+        &#125;
+    &#125;
+ 
+    public static Serialization getSerialization(String name) &#123;
+        return map.get(name);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>提供类似DriverManager的SerializationManager类，在加载类的时候加载所有配置的序列化方式；提供一个getSerialization的今天方法类似getConnection；</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文以JDBC驱动为实例，重点对使用ServiceLoader方式服务发现进行分析，同时提供了序列化的简单实战；dubbo也提供了类似的SPI方式，核心类是ExtensionLoader，比起java官方提供的ServiceLoader功能更强大，后续继续分析一下dubbo的SPI方式，然后进行一个对比。</p>
