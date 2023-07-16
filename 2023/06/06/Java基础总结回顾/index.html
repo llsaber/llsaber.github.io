@@ -421,7 +421,7 @@ SPI概述SPI全称为(Service Provider Interface) ，是JDK内置的一种服务
 
 <hr>
 <h2 id="SPI概述"><a href="#SPI概述" class="headerlink" title="SPI概述"></a>SPI概述</h2><p>SPI全称为(Service Provider Interface) ，是JDK内置的一种服务提供发现机制；主要被框架的开发人员使用，比如java.sql.Driver接口，数据库厂商实现此接口即可，当然要想让系统知道具体实现类的存在，还需要使用固定的存放规则，需要在classpath下的META-INF&#x2F;services&#x2F;目录里创建一个以服务接口命名的文件，这个文件里的内容就是这个接口的具体的实现类；下面以JDBC为实例来进行具体的分析。</p>
-<h2 id="JDBC驱动"><a href="#JDBC驱动" class="headerlink" title="JDBC驱动"></a>JDBC驱动</h2><h3 id="1-准备驱动包"><a href="#1-准备驱动包" class="headerlink" title="1.准备驱动包"></a>1.准备驱动包</h3><pre class="line-numbers language-none"><code class="language-none">&lt;dependency&gt;
+<h2 id="JDBC驱动"><a href="#JDBC驱动" class="headerlink" title="JDBC驱动"></a>JDBC驱动</h2><h3 id="1-准备驱动包"><a href="#1-准备驱动包" class="headerlink" title="1.准备驱动包"></a>1.准备驱动包</h3><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">&lt;dependency&gt;
             &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;
             &lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt;
             &lt;version&gt;5.1.47&lt;&#x2F;version&gt;
@@ -438,11 +438,11 @@ SPI概述SPI全称为(Service Provider Interface) ，是JDK内置的一种服务
         &lt;&#x2F;dependency&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>分别准备了mysql，postgresql和sqlserver，可以打开jar，发现每个jar包的META-INF&#x2F;services&#x2F;都存在一个java.sql.Driver文件，文件里面存在一个或多个类名，比如mysql：</p>
-<pre class="line-numbers language-none"><code class="language-none">com.mysql.jdbc.Driver
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">com.mysql.jdbc.Driver
 com.mysql.fabric.jdbc.FabricMySQLDriver<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>提供的每个驱动类占据一行，解析的时候会按行读取，具体使用哪个会根据url来决定；</p>
-<h3 id="2-简单实例"><a href="#2-简单实例" class="headerlink" title="2.简单实例"></a>2.简单实例</h3><pre class="line-numbers language-none"><code class="language-none">String url &#x3D; &quot;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;db3&quot;;
+<h3 id="2-简单实例"><a href="#2-简单实例" class="headerlink" title="2.简单实例"></a>2.简单实例</h3><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">String url &#x3D; &quot;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;db3&quot;;
 String username &#x3D; &quot;root&quot;;
 String password &#x3D; &quot;root&quot;;
 String sql &#x3D; &quot;update travelrecord set name&#x3D;\&#39;bbb\&#39; where id&#x3D;1&quot;;
@@ -450,7 +450,7 @@ Connection con &#x3D; DriverManager.getConnection(url, username, password);<span
 
 <p>类路径下存在多个驱动包，具体在使用DriverManager.getConnection应该使用哪个驱动类会解析url来识别，不同的数据库有不同的url前缀；</p>
 <h3 id="3-驱动类加载分析"><a href="#3-驱动类加载分析" class="headerlink" title="3.驱动类加载分析"></a>3.驱动类加载分析</h3><p>具体META-INF&#x2F;services&#x2F;下的驱动类是什么时候加载的，DriverManager有一个静态代码块：</p>
-<pre class="line-numbers language-none"><code class="language-none">static &#123;
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">static &#123;
     loadInitialDrivers();
     println(&quot;JDBC DriverManager initialized&quot;);
 &#125;
@@ -519,7 +519,7 @@ private static void loadInitialDrivers() &#123;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>在加载DriverManager类的时候会执行loadInitialDrivers方法，方法内通过了两种加载驱动类的方式，分别是：使用系统变量方式和ServiceLoader加载方式；系统变量方式其实就是在变量jdbc.drivers中配置好驱动类，然后使用Class.forName进行加载；下面重点看一下ServiceLoader方式，此处调用了load方法但是并没有真正去加载驱动类，而是返回了一个LazyIterator，后面的代码就是循环变量迭代器：</p>
-<pre class="line-numbers language-none"><code class="language-none">private static final String PREFIX &#x3D; &quot;META-INF&#x2F;services&#x2F;&quot;;
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">private static final String PREFIX &#x3D; &quot;META-INF&#x2F;services&#x2F;&quot;;
  
 private class LazyIterator
         implements Iterator&lt;S&gt;
@@ -592,7 +592,7 @@ private class LazyIterator
     &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>类中指定了一个静态常量PREFIX &#x3D; “META-INF&#x2F;services&#x2F;”，然后和java.sql.Driver拼接组成了fullName，然后通过类加载器去获取所有类路径下java.sql.Driver文件，获取之后存放在configs中，里面的每个元素对应一个文件，每个文件中可能会存在多个驱动类，所以使用pending用来存放每个文件中的驱动信息，获取驱动信息之后在nextService中使用Class.forName加载类信息，并且指定不进行初始化；同时在下面使用newInstance对驱动类进行了实例化操作；每个驱动类中都提供了一个静态注册代码块，比如mysql：</p>
-<pre class="line-numbers language-none"><code class="language-none">static &#123;
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">static &#123;
     try &#123;
         java.sql.DriverManager.registerDriver(new Driver());
     &#125; catch (SQLException E) &#123;
@@ -601,7 +601,7 @@ private class LazyIterator
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>这里又实例化了一个驱动类，同时注册到DriverManager；接下来就是调用DriverManager的getConnection方法，代码如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">private static Connection getConnection(
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">private static Connection getConnection(
        String url, java.util.Properties info, Class&lt;?&gt; caller) throws SQLException &#123;
        &#x2F;*
         * When callerCl is null, we should check the application&#39;s
@@ -663,7 +663,7 @@ private class LazyIterator
 
 <p>此方法主要是遍历之前注册的DriverInfo，拿着url信息去每个驱动类中建立连接，当然每个驱动类中都会进行url匹配校验，成功之后返回Connection，如果中途有失败的连接并不影响尝试新的驱动连接，遍历完之后还是无法获取连接，则抛出异常；</p>
 <h3 id="4-扩展"><a href="#4-扩展" class="headerlink" title="4.扩展"></a>4.扩展</h3><p>如果想扩展新的驱动类也很简单，只需要在类路径下创建META-INF&#x2F;services&#x2F;文件夹，同时在里面创建java.sql.Driver文件，在文件中写入具体的驱动类名称，当然此类需要继承java.sql.Driver接口类；例如实例中提供的TestDriver。</p>
-<h2 id="序列化实战"><a href="#序列化实战" class="headerlink" title="序列化实战"></a>序列化实战</h2><h3 id="1-准备接口类"><a href="#1-准备接口类" class="headerlink" title="1.准备接口类"></a>1.准备接口类</h3><pre class="line-numbers language-none"><code class="language-none">public interface Serialization &#123;
+<h2 id="序列化实战"><a href="#序列化实战" class="headerlink" title="序列化实战"></a>序列化实战</h2><h3 id="1-准备接口类"><a href="#1-准备接口类" class="headerlink" title="1.准备接口类"></a>1.准备接口类</h3><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public interface Serialization &#123;
  
     &#x2F;**
      * 序列化
@@ -694,10 +694,10 @@ private class LazyIterator
 
 <h3 id="2-准备实现类"><a href="#2-准备实现类" class="headerlink" title="2.准备实现类"></a>2.准备实现类</h3><p>分别准备JsonSerialization和ProtobufSerialization</p>
 <h3 id="3-接口文件"><a href="#3-接口文件" class="headerlink" title="3.接口文件"></a>3.接口文件</h3><p>在META-INF&#x2F;services&#x2F;目录下创建文件com.spi.serializer.Serialization，内容如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">com.spi.serializer.JsonSerialization
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">com.spi.serializer.JsonSerialization
 com.spi.serializer.ProtobufSerialization<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="4-提供Manager类"><a href="#4-提供Manager类" class="headerlink" title="4.提供Manager类"></a>4.提供Manager类</h3><pre class="line-numbers language-none"><code class="language-none">public class SerializationManager &#123;
+<h3 id="4-提供Manager类"><a href="#4-提供Manager类" class="headerlink" title="4.提供Manager类"></a>4.提供Manager类</h3><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public class SerializationManager &#123;
  
     private static Map&lt;String, Serialization&gt; map &#x3D; new HashMap&lt;&gt;();
  
